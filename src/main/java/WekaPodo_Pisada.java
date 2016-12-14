@@ -52,14 +52,13 @@ public class WekaPodo_Pisada extends JFrame implements ActionListener {
                 e1.printStackTrace();
             }
 
-            footlengthdouble = Double.parseDouble(footlengthinput.getText());
             bridgewidthdouble = Double.parseDouble(bridgewidthinput.getText());
             forefootwidthdouble = Double.parseDouble(forefootwidthinput.getText());
             heelwidthdouble = Double.parseDouble(heelwidthinput.getText());
             footareadouble = Double.parseDouble(footareainput.getText());
 
             try {
-                Instance foot = ClassFoot(footlengthdouble,bridgewidthdouble, forefootwidthdouble,
+                Instance foot = ClassFoot(bridgewidthdouble, forefootwidthdouble,
                         heelwidthdouble, footareadouble);
 
                 double result = clsNB.classifyInstance(foot);
@@ -114,7 +113,7 @@ public class WekaPodo_Pisada extends JFrame implements ActionListener {
     }
 
     public void createClass() throws Exception{
-        Instances train = ConverterUtils.DataSource.read("pieses_v4.arff");
+        Instances train = ConverterUtils.DataSource.read("pieses_v5.arff");
         train.setClassIndex(train.numAttributes() - 1);
 
         //Creamos el clasificador
@@ -131,13 +130,6 @@ public class WekaPodo_Pisada extends JFrame implements ActionListener {
         label1=new JLabel("Autores: Marc Bernat, Marc Cabezas, Toni Mas");
         label1.setBounds(10,10,400,30);
         add(label1);
-
-        label2=new JLabel("Longitud del Pie [cm]:");
-        label2.setBounds(10,60,210,20);
-        add(label2);
-        footlengthinput=new JTextField();
-        footlengthinput.setBounds(210,60,150,20);
-        add(footlengthinput);
 
         label3=new JLabel("Amplitud del puente [cm]:");
         label3.setBounds(10,85,230,20);
@@ -187,23 +179,21 @@ public class WekaPodo_Pisada extends JFrame implements ActionListener {
 
     }
 
-    public Instance ClassFoot(double footlengthi, double bridgewidthi, double forefootwidthi, double heelwidthi,
+    public Instance ClassFoot(double bridgewidthi, double forefootwidthi, double heelwidthi,
                           double footareai) throws Exception {
         Instance inst_foot = null;
 
         try{
-            ArrayList<Attribute> attributeList = new ArrayList<Attribute>(6);
+            ArrayList<Attribute> attributeList = new ArrayList<Attribute>(5);
 
             /**
-             * @ATTRIBUTE footlenght	REAL
-             @ATTRIBUTE bridgewidth 	REAL
-             @ATTRIBUTE forefootwidth	REAL
-             @ATTRIBUTE heelwidth	REAL
-             @ATTRIBUTE footarea	REAL
-             @ATTRIBUTE footprint {Pronadora, Estandard}
+             @attribute bridgewidth numeric
+             @attribute forefootwidth numeric
+             @attribute heelwidth numeric
+             @attribute footarea numeric
+             @attribute footprint {Pronadora,Estandard}
              */
 
-            Attribute footlenght = new Attribute("footlenght");
             Attribute bridgewidth = new Attribute("bridgewidth");
             Attribute forefootwidth = new Attribute("forefootwidth");
             Attribute heelwidth = new Attribute("heelwidth");
@@ -215,7 +205,6 @@ public class WekaPodo_Pisada extends JFrame implements ActionListener {
             Attribute ClassAttribute = new Attribute("class", fvClassVal);
 
 
-            attributeList.add(footlenght);
             attributeList.add(bridgewidth);
             attributeList.add(forefootwidth);
             attributeList.add(heelwidth);
@@ -227,7 +216,6 @@ public class WekaPodo_Pisada extends JFrame implements ActionListener {
 
             inst_foot = new DenseInstance(data.numAttributes());
 
-            inst_foot.setValue(footlenght, footlengthi);
             inst_foot.setValue(bridgewidth, bridgewidthi);
             inst_foot.setValue(forefootwidth, forefootwidthi);
             inst_foot.setValue(heelwidth, heelwidthi);
