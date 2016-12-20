@@ -126,7 +126,7 @@ public class WekaPodo_Tipo extends JFrame implements ActionListener, ChangeListe
             Pisada = "Pronadora";
         }
         if (radio2.isSelected()) {
-            Pisada = "Supinadora";
+            Pisada = "Estandard";
         }
     }
 
@@ -226,7 +226,7 @@ public class WekaPodo_Tipo extends JFrame implements ActionListener, ChangeListe
         Instance inst_foot = null;
 
         try{
-            ArrayList<Attribute> attributeList = new ArrayList<Attribute>(7);
+
 
             /**
              * @ATTRIBUTE footlenght	REAL
@@ -236,6 +236,8 @@ public class WekaPodo_Tipo extends JFrame implements ActionListener, ChangeListe
              @ATTRIBUTE footarea	REAL
              @ATTRIBUTE footprint {Pronadora, Estandard}
              */
+
+            ArrayList<Attribute> attributeList = new ArrayList<Attribute>(7);
 
             Attribute footlenght = new Attribute("footlenght");
             Attribute bridgewidth = new Attribute("bridgewidth");

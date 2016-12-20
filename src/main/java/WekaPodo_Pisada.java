@@ -223,9 +223,6 @@ public class WekaPodo_Pisada extends JFrame implements ActionListener {
             inst_foot.setDataset(data);
 
             data.add(inst_foot);
-
-
-
         }
         catch (Exception e)
         {
